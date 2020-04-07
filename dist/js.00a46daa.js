@@ -119,6 +119,61 @@ parcelRequire = (function (modules, cache, entry, globalName) {
   return newRequire;
 })({"js/index.js":[function(require,module,exports) {
 // Your code goes here
+var get = function get(selector) {
+  return document.querySelector(selector);
+};
+
+var getAll = function getAll(selector) {
+  return document.querySelectorAll(selector);
+};
+
+var body = get('body div.container.home');
+var navLinks = getAll('nav a');
+var header = get('header');
+var introImg = get('.intro img');
+
+function changeBackgroundColor(event) {
+  if (event.click === true) {
+    console.log('fuck');
+  }
+
+  event.target.style.backgroundColor = 'blue';
+}
+
+function hoverOn(event) {
+  event.target.style.color = '#191970';
+  event.target.style.backgroundColor = '#008B8B';
+  event.target.style.padding = '20px'; // event.target.style.fontSize = '20px';
+}
+
+function hoverOff(event) {
+  event.target.style.color = '';
+  event.target.style.backgroundColor = '';
+  event.target.style.padding = ''; // event.target.style.fontSize = '';
+}
+
+function shiftClick(event) {
+  if (event.shiftKey === true) {
+    console.log('asdfasdfkas');
+  }
+}
+
+body.addEventListener('click', changeBackgroundColor); // header.addEventListener('mouseover', (event) => {event.target.style.backgroundColor = 'blue';});
+// header.addEventListener('mouseout', (event) => {event.target.style.backgroundColor = '';})
+// header.addEventListener('mouseover', hoverOn);
+// header.addEventListener('mouseout', hoverOff);
+
+navLinks.forEach(function (link) {
+  return link.addEventListener('mouseover', hoverOn);
+});
+navLinks.forEach(function (link) {
+  return link.addEventListener('mouseout', hoverOff);
+}); // for (let i = 0; i < navLinks.length; i++) {
+// 	console.log(navLinks[i]);
+// 	navLinks[i].addEventListener('mouseover', hoverOn);
+// 	navLinks[i].addEventListener('mouseout', hoverOff);
+// }
+// introImg.addEventListener('click', shiftClick);
 },{}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
@@ -147,7 +202,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "64261" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "59517" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
