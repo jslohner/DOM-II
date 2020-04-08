@@ -119,61 +119,161 @@ parcelRequire = (function (modules, cache, entry, globalName) {
   return newRequire;
 })({"js/index.js":[function(require,module,exports) {
 // Your code goes here
+// selectors
 var get = function get(selector) {
   return document.querySelector(selector);
 };
 
 var getAll = function getAll(selector) {
   return document.querySelectorAll(selector);
-};
+}; // add classes
+
+
+var h1s = getAll('h1');
+h1s.forEach(function (title) {
+  return title.classList.add('title');
+});
+var h2s = getAll('h2');
+h2s.forEach(function (title) {
+  return title.classList.add('title');
+});
+var h4s = getAll('h4');
+h4s.forEach(function (title) {
+  return title.classList.add('title');
+}); // fetch elements
 
 var body = get('body div.container.home');
+var nav = get('nav');
 var navLinks = getAll('nav a');
+var logo = get('.logo-heading');
 var header = get('header');
+var home = get('.home');
+var paragraphs = getAll('p');
+var titles = getAll('.title');
 var introImg = get('.intro img');
+var lgImg = get('.img-content img');
+var aaImg = get('.img-fluid.rounded');
+var pydImg = get('.content-destination img');
+var imgList = [introImg, lgImg, aaImg, pydImg];
+var footer = get('footer'); // create buttons
 
-function changeBackgroundColor(event) {
-  if (event.click === true) {
-    console.log('fuck');
-  }
+var paragraphFontButton = document.createElement('button');
+paragraphFontButton.textContent = 'P Font';
+paragraphFontButton.style.color = 'black';
+paragraphFontButton.style.border = 0;
+paragraphFontButton.addEventListener('mouseover', hoverOn);
+paragraphFontButton.addEventListener('mouseout', hoverOff);
+nav.appendChild(paragraphFontButton);
+var titleFontButton = document.createElement('button');
+titleFontButton.textContent = 'Title Font';
+titleFontButton.style.color = 'black';
+titleFontButton.style.border = 0;
+titleFontButton.addEventListener('mouseover', hoverOn);
+titleFontButton.addEventListener('mouseout', hoverOff);
+nav.appendChild(titleFontButton);
+var closeWindowButton = document.createElement('button');
+closeWindowButton.textContent = 'Close Window';
+closeWindowButton.style.color = 'black';
+closeWindowButton.style.border = 0;
+closeWindowButton.addEventListener('mouseover', hoverOn);
+closeWindowButton.addEventListener('mouseout', hoverOff);
+footer.prepend(closeWindowButton);
+var openWindowButton = document.createElement('button');
+openWindowButton.textContent = 'Open Window';
+openWindowButton.style.color = 'black';
+openWindowButton.style.border = 0;
+openWindowButton.addEventListener('mouseover', hoverOn);
+openWindowButton.addEventListener('mouseout', hoverOff);
+footer.prepend(openWindowButton); // functions
 
-  event.target.style.backgroundColor = 'blue';
+function doubleClickImg(event) {
+  event.target.style.display = 'none';
 }
 
 function hoverOn(event) {
   event.target.style.color = '#191970';
   event.target.style.backgroundColor = '#008B8B';
-  event.target.style.padding = '20px'; // event.target.style.fontSize = '20px';
+  event.target.style.padding = '10px';
+  event.target.style.fontSize = '20px';
 }
 
 function hoverOff(event) {
   event.target.style.color = '';
   event.target.style.backgroundColor = '';
-  event.target.style.padding = ''; // event.target.style.fontSize = '';
+  event.target.style.padding = '';
+  event.target.style.fontSize = '';
 }
 
-function shiftClick(event) {
-  if (event.shiftKey === true) {
-    console.log('asdfasdfkas');
+function altClickHeader(event) {
+  if (event.altKey === true) {
+    var randomColor = Math.floor(Math.random() * 16777215).toString(16);
+    header.style.backgroundColor = "#".concat(randomColor);
   }
 }
 
-body.addEventListener('click', changeBackgroundColor); // header.addEventListener('mouseover', (event) => {event.target.style.backgroundColor = 'blue';});
-// header.addEventListener('mouseout', (event) => {event.target.style.backgroundColor = '';})
-// header.addEventListener('mouseover', hoverOn);
-// header.addEventListener('mouseout', hoverOff);
+function paragraphFont(event) {
+  var fonts = ['Palatino Linotype', 'Book Antiqua', 'Times New Roman', 'Arial', 'Helvetica', 'Arial Black', 'Impact', 'Lucida Sans Unicode', 'Tahoma', 'Verdana', 'Courier New', 'Lucida Console'];
+  randomFont = fonts[Math.floor(Math.random() * fonts.length)];
+  paragraphs.forEach(function (p) {
+    return p.style.fontFamily = randomFont;
+  });
+}
 
+function titleFont(event) {
+  var fonts = ['Palatino Linotype', 'Book Antiqua', 'Times New Roman', 'Arial', 'Helvetica', 'Arial Black', 'Impact', 'Lucida Sans Unicode', 'Tahoma', 'Verdana', 'Courier New', 'Lucida Console'];
+  randomFont = fonts[Math.floor(Math.random() * fonts.length)];
+  titles.forEach(function (title) {
+    return title.style.fontFamily = randomFont;
+  });
+}
+
+function randomBackgroundColor(event) {
+  if (event.key === 'b') {
+    var sections = [header, home, footer];
+    var changeSection = sections[Math.floor(Math.random() * sections.length)];
+    var randomColor = Math.floor(Math.random() * 16777215).toString(16);
+    changeSection.style.backgroundColor = "#".concat(randomColor);
+  }
+}
+
+function resizeWindow(event) {
+  introImg.style.display = 'none';
+  pydImg.style.display = 'none';
+}
+
+function scrollColor(event) {
+  var randomColor = Math.floor(Math.random() * 16777215).toString(16);
+  header.style.backgroundColor = "#".concat(randomColor);
+  home.style.color = "#".concat(randomColor);
+}
+
+function openWin(event) {
+  var newWindow = window.open('https://www.w3schools.com', '_blank', 'width=500, height=500');
+} // event listeners
+
+
+window.addEventListener('load', function (event) {
+  console.log('Fun Bus Travel Agency Webpage is now fully loaded!');
+});
+window.addEventListener('scroll', scrollColor);
+header.addEventListener('click', altClickHeader);
 navLinks.forEach(function (link) {
   return link.addEventListener('mouseover', hoverOn);
 });
 navLinks.forEach(function (link) {
   return link.addEventListener('mouseout', hoverOff);
-}); // for (let i = 0; i < navLinks.length; i++) {
-// 	console.log(navLinks[i]);
-// 	navLinks[i].addEventListener('mouseover', hoverOn);
-// 	navLinks[i].addEventListener('mouseout', hoverOff);
-// }
-// introImg.addEventListener('click', shiftClick);
+});
+paragraphFontButton.addEventListener('click', paragraphFont);
+titleFontButton.addEventListener('click', titleFont);
+imgList.forEach(function (img) {
+  return img.addEventListener('dblclick', doubleClickImg);
+});
+document.addEventListener('keydown', randomBackgroundColor);
+window.addEventListener('resize', resizeWindow);
+var socket = new WebSocket('file:///Users/justinlohner/Desktop/Lambda/Lambda%20Assignments/2%20-%20Web%20Apps1/1unit/Projects/DOM-II/index.html#');
+socket.addEventListener('open', function (event) {
+  socket.send('Hello Server!');
+});
 },{}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
@@ -202,7 +302,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "59517" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "63971" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
